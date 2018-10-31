@@ -33,12 +33,21 @@ public void keyPressed()
 		}
 		if (keyCode == LEFT)
 		{
-			ship.turn(-10);
+			ship.turn(-15);
 		}
 		if (keyCode == RIGHT)
 		{
-			ship.turn(10);
+			ship.turn(15);
 		}	
+	}
+
+	if (key =='h')
+	{
+		ship.setX((int)(Math.random()*500));
+		ship.setY((int)(Math.random()*500));
+		ship.setDirectionX(0);
+		ship.setDirectionY(0);
+		ship.setPointDirection((int)(Math.random()*360));
 	}
 
 
