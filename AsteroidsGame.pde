@@ -5,7 +5,7 @@ public void setup()
 {	
 	size(500,500);
 	ship = new Spaceship();
-	asteroids = new Asteroid[8];
+	asteroids = new Asteroid[10];
 	for(int i= 0; i < asteroids.length; i++)
 	{
 		asteroids[i]= new Asteroid();
