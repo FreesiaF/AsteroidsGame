@@ -6,7 +6,7 @@ public void setup()
 	size(500,500);
 	ship = new Spaceship();
 	asteroids = new ArrayList <Asteroid>();
-	for(int i= 0; i < asteroids.size(); i++)
+	for(int i= 0; i < 6; i++)
 	{
 		asteroids.add(new Asteroid());
 	}
@@ -30,6 +30,9 @@ public void draw()
 	{
 		asteroids.get(i).move();
 		asteroids.get(i).show();
+		float d = dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) ;
+		if (d<10)
+			asteroids.remove(i);
 	}
 	
 
@@ -54,16 +57,14 @@ public void keyPressed()
 		{
 			ship.turn(15);
 		}	
+		if(keyCode == DOWN)
+		{
+			ship.setX((int)(Math.random()*500));
+			ship.setY((int)(Math.random()*500));
+			ship.setDirectionX(0);
+			ship.setDirectionY(0);
+			ship.setPointDirection((int)(Math.random()*360));
+		}
 	}
-
-	if (key =='h')
-	{
-		ship.setX((int)(Math.random()*500));
-		ship.setY((int)(Math.random()*500));
-		ship.setDirectionX(0);
-		ship.setDirectionY(0);
-		ship.setPointDirection((int)(Math.random()*360));
-	}
-
 
 }
