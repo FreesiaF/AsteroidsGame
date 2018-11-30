@@ -1,11 +1,14 @@
 Spaceship ship;
 Star[] stars;
+ArrayList <Bullet> bullets;
 ArrayList <Asteroid> asteroids; 
 public void setup() 
 {	
 	size(500,500);
 	ship = new Spaceship();
 	asteroids = new ArrayList <Asteroid>();
+	bullets = new ArrayList <Bullet>();
+
 	for(int i= 0; i < 6; i++)
 	{
 		asteroids.add(new Asteroid());
@@ -33,6 +36,12 @@ public void draw()
 		float d = dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) ;
 		if (d<10)
 			asteroids.remove(i);
+	}
+	
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		bullets.get(i).move();
+		bullets.get(i).show();	
 	}
 	
 
@@ -65,6 +74,13 @@ public void keyPressed()
 			ship.setDirectionY(0);
 			ship.setPointDirection((int)(Math.random()*360));
 		}
+
+	}
+	if (key == 'v')
+	{
+
+		bullets.add(new Bullet(ship));
+
 	}
 
 }
