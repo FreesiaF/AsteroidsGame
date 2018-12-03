@@ -33,6 +33,16 @@ public void draw()
 	{
 		asteroids.get(i).move();
 		asteroids.get(i).show();
+		for (int x = 0; x < bullets.size(); x++){
+			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(x).getX()),(asteroids.get(x).getY())) < 10)
+			{
+				asteroids.remove(x);
+				bullets.remove(x);
+				break;	
+			}			
+		}
+
+		
 		float d = dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) ;
 		if (d<10)
 			asteroids.remove(i);
@@ -42,8 +52,9 @@ public void draw()
 	{
 		bullets.get(i).move();
 		bullets.get(i).show();	
-	}
 	
+	}
+
 
 	ship.move();
 	ship.show();
