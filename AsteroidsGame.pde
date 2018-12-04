@@ -2,14 +2,16 @@ Spaceship ship;
 Star[] stars;
 ArrayList <Bullet> bullets;
 ArrayList <Asteroid> asteroids; 
+ArrayList <SmallAsteroid> tinyrock;
 public void setup() 
 {	
 	size(500,500);
 	ship = new Spaceship();
 	asteroids = new ArrayList <Asteroid>();
 	bullets = new ArrayList <Bullet>();
+	tinyrock = new ArrayList <SmallAsteroid>();
 
-	for(int i= 0; i < 6; i++)
+	for(int i= 0; i < 8; i++)
 	{
 		asteroids.add(new Asteroid());
 	}
@@ -34,18 +36,23 @@ public void draw()
 		asteroids.get(i).move();
 		asteroids.get(i).show();
 		for (int x = 0; x < bullets.size(); x++){
-			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(x).getX()),(asteroids.get(x).getY())) < 10)
+			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
-				asteroids.remove(x);
 				bullets.remove(x);
+				asteroids.remove(i);
+				tinyrock.add(new SmallAsteroid());
+				tinyrock.add(new SmallAsteroid());
+				System.out.println(bullets.size());
 				break;	
 			}			
 		}
 
-		
+		/*
 		float d = dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) ;
 		if (d<10)
 			asteroids.remove(i);
+		*/
+		
 	}
 	
 	for (int i = 0; i < bullets.size(); i++)
@@ -54,6 +61,14 @@ public void draw()
 		bullets.get(i).show();	
 	
 	}
+
+	for (int i = 0; i < tinyrock.size(); i++)
+	{
+		tinyrock.get(i).move();
+		tinyrock.get(i).show();	
+	
+	}
+
 
 
 	ship.move();
