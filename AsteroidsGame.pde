@@ -3,6 +3,7 @@ Star[] stars;
 ArrayList <Bullet> bullets;
 ArrayList <Asteroid> asteroids; 
 ArrayList <SmallAsteroid> tinyrock;
+int score = 0;
 public void setup() 
 {	
 	size(500,500);
@@ -10,6 +11,7 @@ public void setup()
 	asteroids = new ArrayList <Asteroid>();
 	bullets = new ArrayList <Bullet>();
 	tinyrock = new ArrayList <SmallAsteroid>();
+
 
 	for(int i= 0; i < 8; i++)
 	{
@@ -26,6 +28,7 @@ public void setup()
 public void draw() 
 {
 	background(0);
+
 	for (int i = 0; i < stars.length; i ++)
 	{
 		stars[i].show();
@@ -38,13 +41,14 @@ public void draw()
 		for (int x = 0; x < bullets.size(); x++){
 			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
+				score = score + 20;
 				bullets.remove(x);
+				tinyrock.add(new SmallAsteroid(asteroids.get(i)));
+				tinyrock.add(new SmallAsteroid(asteroids.get(i)));
 				asteroids.remove(i);
-				tinyrock.add(new SmallAsteroid());
-				tinyrock.add(new SmallAsteroid());
-				System.out.println(bullets.size());
 				break;	
-			}			
+			}	
+
 		}
 
 		/*
@@ -66,13 +70,24 @@ public void draw()
 	{
 		tinyrock.get(i).move();
 		tinyrock.get(i).show();	
-	
+		for (int x = 0; x < bullets.size(); x++){
+			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(tinyrock.get(i).getX()),(tinyrock.get(i).getY())) < 10)
+			{
+				score = score + 50;
+				bullets.remove(x);
+				tinyrock.remove(i);
+				break;	
+			}	
+					
+		}
 	}
 
 
 
 	ship.move();
 	ship.show();
+	textSize(20);
+	text(score, 50,50);
 
 }
 

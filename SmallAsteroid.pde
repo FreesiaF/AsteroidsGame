@@ -1,35 +1,35 @@
 class SmallAsteroid extends Floater
 {
-	public SmallAsteroid()
+	public SmallAsteroid(Asteroid asteroids)
 	{
 		corners = 10;
 		xCorners = new int[corners];
 		yCorners = new int[corners];
-		xCorners[0] = -8*2;
-		yCorners[0] = -8*2;
-		xCorners[1] = -4*2;
-		yCorners[1] = -4*2;
+		xCorners[0] = -8;
+		yCorners[0] = -8;
+		xCorners[1] = -4;
+		yCorners[1] = -4;
 		xCorners[2] = 0;
-		yCorners[2] = -8*2;
-		xCorners[3] = 2*2;
-		yCorners[3] = -4*2;
-		xCorners[4] = 4*2;
+		yCorners[2] = -8;
+		xCorners[3] = 2;
+		yCorners[3] = -4;
+		xCorners[4] = 4;
 		yCorners[4] = 0;
-		xCorners[5] = 8*2;
-		yCorners[5] = 4*2;
+		xCorners[5] = 8;
+		yCorners[5] = 4;
 		xCorners[6] = 0;
-		yCorners[6] = 4*2;
-		xCorners[7] = -2*2;
-		yCorners[7] = 8*2;
-		xCorners[8] = -4*2;
-		yCorners[8] = 4*2;
-		xCorners[9] = -8*2;
-		yCorners[9] =2*2;
+		yCorners[6] = 4;
+		xCorners[7] = -2;
+		yCorners[7] = 8;
+		xCorners[8] = -4;
+		yCorners[8] = 4;
+		xCorners[9] = -8;
+		yCorners[9] =2;
 
-		myCenterX = Math.random()* 500;
-		myCenterY = Math.random()* 500;
-		myDirectionX = Math.random()* 5 -2;
-		myDirectionY = Math.random()* 5 -2;
+		myCenterX = asteroids.getX();
+		myCenterY = asteroids.getY();
+		myDirectionX = Math.random()* 8 -4;
+		myDirectionY = Math.random()* 8 -4;
 		myColor = color(210,190,190);
 		myPointDirection = 0;
 
