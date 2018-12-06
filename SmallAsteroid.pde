@@ -1,6 +1,6 @@
 class SmallAsteroid extends Floater
 {
-	public SmallAsteroid(Asteroid asteroids)
+	public SmallAsteroid( MidAsteroid asteroids)
 	{
 		corners = 10;
 		xCorners = new int[corners];
@@ -28,8 +28,8 @@ class SmallAsteroid extends Floater
 
 		myCenterX = asteroids.getX();
 		myCenterY = asteroids.getY();
-		myDirectionX = Math.random()* 8 -4;
-		myDirectionY = Math.random()* 8 -4;
+		myDirectionX = Math.random()* 10 -5;
+		myDirectionY = Math.random()* 10 -5;
 		myColor = color(210,190,190);
 		myPointDirection = 0;
 
