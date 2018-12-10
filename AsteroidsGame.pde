@@ -42,7 +42,7 @@ public void draw()
 		for (int x = 0; x < bullets.size(); x++){
 			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
-				score = score + 20;
+				score = score + 25;
 				bullets.remove(x);
 				medAstroid.add(new MidAsteroid(asteroids.get(i)));
 				medAstroid.add(new MidAsteroid(asteroids.get(i)));
@@ -57,6 +57,7 @@ public void draw()
 		if (d<10)
 			asteroids.remove(i);
 		*/
+		
 		
 	}
 	
