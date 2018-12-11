@@ -4,7 +4,9 @@ ArrayList <Bullet> bullets;
 ArrayList <Asteroid> asteroids; 
 ArrayList <SmallAsteroid> tinyrock;
 ArrayList <MidAsteroid> medAstroid;
+ArrayList <Spaceship> lives;
 int score = 0;
+boolean gameOver = false;
 public void setup() 
 {	
 	size(500,500);
@@ -13,6 +15,18 @@ public void setup()
 	bullets = new ArrayList <Bullet>();
 	tinyrock = new ArrayList <SmallAsteroid>();
 	medAstroid = new ArrayList <MidAsteroid>();
+	lives = new ArrayList <Spaceship>();
+
+	for (int i= 0; i < 3; i++)
+	{
+
+		lives.add(new Spaceship());
+
+		lives.get(i).setX(50+20*i);
+		lives.get(i).setY(80);
+		lives.get(i).setPointDirection(-90);
+		
+	}
 
 	for(int i= 0; i < 10; i++)
 	{
@@ -34,6 +48,8 @@ public void draw()
 	{
 		stars[i].show();
 	}
+
+
 	
 	for (int i = 0; i < asteroids.size(); i++)
 	{
@@ -42,21 +58,16 @@ public void draw()
 		for (int x = 0; x < bullets.size(); x++){
 			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
-				score = score + 25;
+				score = score + 20;
 				bullets.remove(x);
 				medAstroid.add(new MidAsteroid(asteroids.get(i)));
 				medAstroid.add(new MidAsteroid(asteroids.get(i)));
 				asteroids.remove(i);
 				break;	
 			}	
-
 		}
 
-		/*
-		float d = dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) ;
-		if (d<10)
-			asteroids.remove(i);
-		*/
+
 		
 		
 	}
@@ -105,7 +116,19 @@ public void draw()
 	ship.move();
 	ship.show();
 	textSize(20);
-	text(score, 50,50);
+	text(score, 45,50);
+	for (int i = 0; i < lives.size(); i++)
+	{
+		lives.get(i).show();
+		if (dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
+			{
+				lives.remove(i);
+				break;
+			}
+
+		if (lives.size() == 0)
+			gameOver = true;
+	}
 
 }
 
