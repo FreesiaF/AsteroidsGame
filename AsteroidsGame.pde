@@ -3,7 +3,7 @@ Star[] stars;
 ArrayList <Bullet> bullets;
 ArrayList <Asteroid> asteroids; 
 ArrayList <SmallAsteroid> tinyrock;
-ArrayList <MidAsteroid> medAstroid;
+ArrayList <MidAsteroid> medAsteroid;
 ArrayList <Spaceship> lives;
 int score = 0;
 boolean gameOver = false;
@@ -14,7 +14,7 @@ public void setup()
 	asteroids = new ArrayList <Asteroid>();
 	bullets = new ArrayList <Bullet>();
 	tinyrock = new ArrayList <SmallAsteroid>();
-	medAstroid = new ArrayList <MidAsteroid>();
+	medAsteroid = new ArrayList <MidAsteroid>();
 	lives = new ArrayList <Spaceship>();
 
 	for (int i= 0; i < 3; i++)
@@ -49,49 +49,64 @@ public void draw()
 		stars[i].show();
 	}
 
-
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		bullets.get(i).move();
+		bullets.get(i).show();	
+	}
 	
 	for (int i = 0; i < asteroids.size(); i++)
 	{
 		asteroids.get(i).move();
 		asteroids.get(i).show();
-		for (int x = 0; x < bullets.size(); x++){
+		for (int x = 0; x < bullets.size(); x++)
+		{
 			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
 				score = score + 20;
 				bullets.remove(x);
-				medAstroid.add(new MidAsteroid(asteroids.get(i)));
-				medAstroid.add(new MidAsteroid(asteroids.get(i)));
+				medAsteroid.add(new MidAsteroid(asteroids.get(i)));
+				medAsteroid.add(new MidAsteroid(asteroids.get(i)));
 				asteroids.remove(i);
 				break;	
 			}	
 		}
 
-
-		
-		
+		for (int x = 0; x < lives.size(); x++)
+		{
+			if ((asteroids.size() > 0) && dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
+			{
+				lives.remove(x);
+				break;
+			}
+		}		
 	}
 	
-	for (int i = 0; i < bullets.size(); i++)
-	{
-		bullets.get(i).move();
-		bullets.get(i).show();	
-	
-	}
 
-	for (int i = 0; i < medAstroid.size(); i++)
+
+	for (int i = 0; i < medAsteroid.size(); i++)
 	{
-		medAstroid.get(i).move();
-		medAstroid.get(i).show();
-		for (int x = 0; x < bullets.size(); x++){
-			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(medAstroid.get(i).getX()),(medAstroid.get(i).getY())) < 10)
+		medAsteroid.get(i).move();
+		medAsteroid.get(i).show();
+		for (int x = 0; x < bullets.size(); x++)
+		{
+			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(medAsteroid.get(i).getX()),(medAsteroid.get(i).getY())) < 10)
 			{
 				score = score + 50;
 				bullets.remove(x);
-				tinyrock.add(new SmallAsteroid(medAstroid.get(i)));
-				tinyrock.add(new SmallAsteroid(medAstroid.get(i)));
-				medAstroid.remove(i);
+				tinyrock.add(new SmallAsteroid(medAsteroid.get(i)));
+				tinyrock.add(new SmallAsteroid(medAsteroid.get(i)));
+				medAsteroid.remove(i);
 				break;
+			}	
+		}
+
+		for (int x = 0; x < lives.size(); x++)
+		{
+			if ((medAsteroid.size() > 0) && (dist((ship.getX()),(ship.getY()),(medAsteroid.get(i).getX()),(medAsteroid.get(i).getY())) < 10))
+			{
+				lives.remove(x);
+				break;			
 			}	
 		}	
 	}
@@ -100,7 +115,8 @@ public void draw()
 	{
 		tinyrock.get(i).move();
 		tinyrock.get(i).show();	
-		for (int x = 0; x < bullets.size(); x++){
+		for (int x = 0; x < bullets.size(); x++)
+		{
 			if (dist((bullets.get(x).getX()),(bullets.get(x).getY()),(tinyrock.get(i).getX()),(tinyrock.get(i).getY())) < 10)
 			{
 				score = score + 100;
@@ -109,27 +125,38 @@ public void draw()
 				break;	
 			}				
 		}
-	}
 
+		for (int x = 0; x < lives.size(); x++)
+		{
+			if ((tinyrock.size() > 0) && dist((ship.getX()),(ship.getY()),(tinyrock.get(i).getX()),(tinyrock.get(i).getY())) < 10)
+			{
+				lives.remove(x);
+				break;			
+			}	
+		}
+	}
 
 
 	ship.move();
 	ship.show();
 	textSize(20);
 	text(score, 45,50);
+
 	for (int i = 0; i < lives.size(); i++)
 	{
-		lives.get(i).show();
-		if (dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
-			{
-				lives.remove(i);
-				break;
-			}
-
 		if (lives.size() == 0)
 			gameOver = true;
+
+		lives.get(i).show();		
+
+		
 	}
 
+	if (gameOver == true)
+	{
+		fill(0);
+		rect(0,0,500,500);
+	}
 }
 
 public void keyPressed()
