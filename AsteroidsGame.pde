@@ -7,6 +7,7 @@ ArrayList <MidAsteroid> medAsteroid;
 ArrayList <Spaceship> lives;
 int score = 0;
 boolean gameOver = false;
+Asteroid gameOverA;
 public void setup() 
 {	
 	size(500,500);
@@ -16,6 +17,10 @@ public void setup()
 	tinyrock = new ArrayList <SmallAsteroid>();
 	medAsteroid = new ArrayList <MidAsteroid>();
 	lives = new ArrayList <Spaceship>();
+	gameOverA = new Asteroid();
+	gameOverA.setX(170);
+	gameOverA.setY(190);
+	gameOverA.setPointDirection(-100);
 
 	for (int i= 0; i < 3; i++)
 	{
@@ -42,6 +47,7 @@ public void setup()
 
 public void draw() 
 {
+	System.out.println(lives.size());
 	background(0);
 
 	for (int i = 0; i < stars.length; i ++)
@@ -70,12 +76,16 @@ public void draw()
 				asteroids.remove(i);
 				break;	
 			}	
-		}
-
+		}	
+	}
+	for (int i = 0; i < asteroids.size(); i++)
+	{
 		for (int x = 0; x < lives.size(); x++)
 		{
 			if ((asteroids.size() > 0) && dist((ship.getX()),(ship.getY()),(asteroids.get(i).getX()),(asteroids.get(i).getY())) < 10)
 			{
+				ship.setX(250);
+				ship.setY(250);
 				lives.remove(x);
 				break;
 			}
@@ -99,17 +109,21 @@ public void draw()
 				medAsteroid.remove(i);
 				break;
 			}	
-		}
-
+		}	
+	}
+	for (int i = 0; i < medAsteroid.size(); i++)
+	{
 		for (int x = 0; x < lives.size(); x++)
 		{
 			if ((medAsteroid.size() > 0) && (dist((ship.getX()),(ship.getY()),(medAsteroid.get(i).getX()),(medAsteroid.get(i).getY())) < 10))
 			{
+				ship.setX(250);
+				ship.setY(250);
 				lives.remove(x);
 				break;			
 			}	
-		}	
-	}
+		}
+	}	
 
 	for (int i = 0; i < tinyrock.size(); i++)
 	{
@@ -126,14 +140,21 @@ public void draw()
 			}				
 		}
 
+		
+	}
+	for (int i = 0; i < tinyrock.size(); i++)
+	{
 		for (int x = 0; x < lives.size(); x++)
 		{
 			if ((tinyrock.size() > 0) && dist((ship.getX()),(ship.getY()),(tinyrock.get(i).getX()),(tinyrock.get(i).getY())) < 10)
 			{
+				ship.setX(250);
+				ship.setY(250);
 				lives.remove(x);
 				break;			
 			}	
 		}
+	
 	}
 
 
@@ -144,18 +165,24 @@ public void draw()
 
 	for (int i = 0; i < lives.size(); i++)
 	{
-		if (lives.size() == 0)
-			gameOver = true;
-
-		lives.get(i).show();		
-
-		
+		lives.get(i).show();
+			
 	}
+	if (lives.size() == 0)
+		gameOver = true;
 
 	if (gameOver == true)
 	{
 		fill(0);
 		rect(0,0,500,500);
+		fill(10,200,10);
+		textAlign(CENTER);
+		textSize(40);
+		text("G    ME  OVER", 250,200);
+		gameOverA.show();
+		fill(210,190,190);
+		textSize(15);
+		text("SCORE: " + score, 250,275);
 	}
 }
 

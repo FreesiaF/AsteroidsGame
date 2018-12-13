@@ -37,7 +37,7 @@ class MidAsteroid extends Floater
 	
 	public void move()
 	{
-		turn(((int)(Math.random()*5)));
+		turn(((int)((Math.random()*10)-5)));
 		super.move();
 	}
 
