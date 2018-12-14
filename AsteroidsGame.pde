@@ -33,7 +33,7 @@ public void setup()
 		
 	}
 
-	for(int i= 0; i < 10; i++)
+	for(int i= 0; i < 8; i++)
 	{
 		asteroids.add(new Asteroid());
 	}
@@ -47,7 +47,6 @@ public void setup()
 
 public void draw() 
 {
-	System.out.println(lives.size());
 	background(0);
 
 	for (int i = 0; i < stars.length; i ++)
@@ -173,8 +172,13 @@ public void draw()
 
 	if (gameOver == true)
 	{
-		fill(0);
-		rect(0,0,500,500);
+		
+		background(0);
+		for (int i = 0; i < stars.length; i ++)
+		{	
+			stars[i].show();
+		}
+
 		fill(10,200,10);
 		textAlign(CENTER);
 		textSize(40);

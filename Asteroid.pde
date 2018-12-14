@@ -1,6 +1,7 @@
 
 class Asteroid extends Floater
 {
+	private int rotation = (int)(Math.random()*10)-5;
 	public Asteroid()
 	{
 		corners = 10;
@@ -38,7 +39,7 @@ class Asteroid extends Floater
 	
 	public void move()
 	{
-		turn(((int)(Math.random()*5)));
+		turn(rotation);
 		super.move();
 	}
 
